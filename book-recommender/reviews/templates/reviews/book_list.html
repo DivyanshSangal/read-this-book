@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h2>Book list</h2>
+{% endblock %}
+
+{% block content %}
+{% if book_list %}
+<div class="row">
+    {% for book in book_list %}
+    <div class="col-xs-6 col-lg-4">
+        <h4><a href="{% url 'reviews:book_detail' book.id %}">
+        {{ book.name }}
+        </a></h4>
+        <h5>{{ book.review_set.count }} reviews</h5>
+        <h5>{{ book.average_rating | floatformat }} average rating</h5>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+    <p>No books are available.</p>
+{% endif %}
+{% endblock %}
